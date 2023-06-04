@@ -20,11 +20,11 @@ sudo apt-get install -y xargs
 
 echo """
 # Manual aliases
-alias ll='ls -lh --group-dirs=first'
-alias la='ls -a --group-dirs=first'
-alias l='ls --group-dirs=first'
-alias lla='ls -lha --group-dirs=first'
-alias ls='ls --group-dirs=first'
+alias ll='ls -lh --group-directories-first'
+alias la='ls -a --group-directories-first'
+alias l='ls --group-directories-first'
+alias lla='ls -lha --group-directories-first'
+alias ls='ls --group-directories-first'
 """ >> ~/.bash_profile
 source ~/.bash_profile
 
@@ -41,7 +41,9 @@ select choice in "${choices[@]}"; do
 
 					echo "Installing Golang"
 					wget https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
+					# wget https://go.dev/dl/go1.20.4.linux-arm64.tar.gz
 					sudo tar -xvf go1.13.4.linux-amd64.tar.gz
+					# sudo tar -xvf go1.20.4.linux-arm64.tar.gz
 					sudo mv go /usr/local
 					export GOROOT=/usr/local/go
 					export GOPATH=$HOME/go
@@ -74,7 +76,7 @@ echo "done"
 echo "installing JSParser"
 git clone https://github.com/nahamsec/JSParser.git
 cd JSParser*
-sudo python setup.py install
+sudo python3 setup.py install
 cd ~/tools/
 echo "done"
 
@@ -239,6 +241,7 @@ echo "done"
 
 echo "downloading Gf-Patterns"
 git clone https://github.com/1ndianl33t/Gf-Patterns ~/Gf-Patterns
+sudo mkdir /root/.gf
 mv ~/Gf-Patterns/*.json /root/.gf/
 rm -r ~/Gf-Patterns
 echo "done"
@@ -263,7 +266,7 @@ echo "done"
 
 echo -e "\n\n\n\n\n\n\n\n\n\n\nDone! All tools are set up in ~/tools"
 ls -la
-echo "-> Don't forget to set your subfinder config file with all your API keys!"
+echo -e "\n\n-> Don't forget to set your subfinder config file with all your API keys!"
 echo "-> Don't forget to set notify with your credentials!"
 
 
