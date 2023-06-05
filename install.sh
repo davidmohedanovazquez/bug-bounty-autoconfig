@@ -53,6 +53,9 @@ select choice in "${choices[@]}"; do
 					echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile	
 					source ~/.bash_profile
 					sleep 1
+					rm go1.13.4.linux-amd64.tar.gz
+					#rm go1.20.4.linux-arm64.tar.gz
+					go env -w GO111MODULE=auto
 					break
 					;;
 				no)
@@ -121,19 +124,21 @@ cd ~/tools/
 echo "done"
 
 echo "installing httprobe"
-go get -u github.com/tomnomnom/httprobe 
+go install github.com/tomnomnom/httprobe@latest
 echo "done"
 
 echo "installing unfurl"
-go get -u github.com/tomnomnom/unfurl 
+go install github.com/tomnomnom/unfurl@latest
 echo "done"
 
 echo "installing waybackurls"
-go get github.com/tomnomnom/waybackurls
+go install github.com/tomnomnom/waybackurls@latest
 echo "done"
 
 echo "installing gf"
 go get -u github.com/tomnomnom/gf
+echo 'source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.bash' >> ~/.bashrc
+source ~/.bashrc
 echo "done"
 
 echo "installing assetfinder"
@@ -141,11 +146,12 @@ go get -u github.com/tomnomnom/assetfinder
 echo "done"
 
 echo "installing naabu"
-go get -u -v github.com/projectdiscovery/naabu/v2/cmd/naabu
+sudo apt install -y libpcap-dev
+go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
 echo "done"
 
 echo "installing nuclei"
-go get -u -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei
+go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 echo "done"
 
 echo "downloading nuclei-templates"
@@ -157,11 +163,11 @@ git clone https://github.com/projectdiscovery/fuzzing-templates.git ~/fuzzing-te
 echo "done"
 
 echo "installing subfinder"
-GO111MODULE=on go get -u -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 echo "done"
 
 echo "installing chaos"
-GO111MODULE=on go get -v github.com/projectdiscovery/chaos-client/cmd/chaos
+go install -v github.com/projectdiscovery/chaos-client/cmd/chaos@latest
 echo "done"
 
 echo "installing dnsx"
@@ -173,27 +179,27 @@ go install -v github.com/projectdiscovery/notify/cmd/notify@latest
 echo "done"
 
 echo "installing dalfox"
-go get -u -v github.com/hahwul/dalfox
+go install github.com/hahwul/dalfox/v2@latest
 echo "done"
 
 echo "installing gau"
-go get -u -v github.com/lc/gau
+go install github.com/lc/gau/v2/cmd/gau@latest
 echo "done"
 
-echo "installing subjs"
-GO111MODULE=on go get -u -v github.com/lc/subjs
-echo "done"
+#echo "installing subjs"
+#go install github.com/lc/subjs@latest
+#echo "done"
 
 echo "installing hakrawler"
-go get github.com/hakluke/hakrawler
+go install github.com/hakluke/hakrawler@latest
 echo "done"
 
 echo "installing hakrevdns"
-go get github.com/hakluke/hakrevdns
+go install github.com/hakluke/hakrevdns@latest
 echo "done"
 
 echo "installing httpx"
-go get -u -v github.com/projectdiscovery/httpx/cmd/httpx
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 echo "done"
 
 echo "installing katana"
@@ -216,12 +222,16 @@ echo "installing ParamSpider"
 git clone https://github.com/devanshbatham/ParamSpider
 echo "done"
 
-echo "installing dnsprobe"
-go get -u -v github.com/projectdiscovery/dnsprobe
-echo "done"
-
 echo "installing kxss"
-go get github.com/Emoe/kxss
+wget https://github.com/tomnomnom/hacks/archive/refs/heads/master.zip
+unzip master.zip
+cd hacks-master/kxss/
+go env -w GO111MODULE=auto
+go build
+sudo cp kxss /usr/local/go/bin/
+cd ~/tools/
+rm -r hacks-master
+rm master.zip
 echo "done"
 
 echo "installing knock.py"
@@ -235,14 +245,14 @@ echo "installing gowitness"
 go install github.com/sensepost/gowitness@latest
 echo "done"
 # -- choose one of this two tools
-echo "Installing Aquatone"
-go get github.com/michenriksen/aquatone
-echo "done"
+#echo "Installing Aquatone"
+#go get github.com/michenriksen/aquatone
+#echo "done"
 
 echo "downloading Gf-Patterns"
 git clone https://github.com/1ndianl33t/Gf-Patterns ~/Gf-Patterns
 sudo mkdir /root/.gf
-mv ~/Gf-Patterns/*.json /root/.gf/
+sudo mv ~/Gf-Patterns/*.json /root/.gf/
 rm -r ~/Gf-Patterns
 echo "done"
 
@@ -258,15 +268,15 @@ echo "done"
 https://github.com/walles/riff/releases/download/2.23.3/riff-2.23.3-x86_64-linux
 echo "installing riff"
 wget https://github.com/walles/riff/releases/download/2.23.3/riff-2.23.3-x86_64-linux
-chmod a+x riff-*
-mv riff-* /usr/local/bin/riff
+sudo chmod a+x riff-*
+sudo mv riff-* /usr/local/bin/riff
 echo "done"
 
 
 
 echo -e "\n\n\n\n\n\n\n\n\n\n\nDone! All tools are set up in ~/tools"
 ls -la
-echo -e "\n\n-> Don't forget to set your subfinder config file with all your API keys!"
+echo -e "\n\n-> Don't forget to set your subfinder config file with all your API keys! (in)"
 echo "-> Don't forget to set notify with your credentials!"
 
 
