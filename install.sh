@@ -265,7 +265,6 @@ cat dns-Jhaddix.txt | head -n -14 > clean-jhaddix-dns.txt
 cd ~/tools/
 echo "done"
 
-https://github.com/walles/riff/releases/download/2.23.3/riff-2.23.3-x86_64-linux
 echo "installing riff"
 wget https://github.com/walles/riff/releases/download/2.23.3/riff-2.23.3-x86_64-linux
 sudo chmod a+x riff-*
