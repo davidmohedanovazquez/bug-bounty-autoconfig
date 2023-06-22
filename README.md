@@ -56,3 +56,11 @@ $> bash install.sh
 - fuzzing-templates
 - Gf-Patterns
 - Seclists
+
+## Tools to add:
+- inscope
+- ettu
+- uro
+- Mantra
+- fff
+- HBSQLI
