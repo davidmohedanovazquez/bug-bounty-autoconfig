@@ -63,4 +63,6 @@ $> bash install.sh
 - uro
 - Mantra
 - fff
+- Ghauri
+- solve the installation of gf-patterns
 - HBSQLI
