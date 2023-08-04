@@ -66,3 +66,4 @@ $> bash install.sh
 - Ghauri
 - solve the installation of gf-patterns
 - HBSQLI
+- urldedupe
